@@ -42,8 +42,12 @@ def extract_book(card):
         rating = None
     
     return {
+        "source_id_raw": None,       
         "title_raw": title,
+        "brand_raw": None,
+        "category_raw": None,
         "price_raw": price,
+        "currency_raw": None,
         "availability_raw": availability,
         "rating_raw": rating,
         "product_url_raw": product_url
