@@ -1,7 +1,8 @@
 import argparse
 from src.pipeline import run_pipeline
 from pprint import pprint
-from src.writer import save_csv, save_json
+from src.writer import save_csv, save_json, save_text
+from src.report import generate_markdown_report
 
 def non_negative_int(value):
     try:
@@ -35,6 +36,7 @@ def parse_args():
     parser.add_argument("--amazon-limit", default=None, type=positive_int, help="Rows limit for Amazon")
     parser.add_argument("--csv-output", default="data/processed/products.csv", help="CSV output path")
     parser.add_argument("--json-output", default="data/processed/pipeline_result.json", help="JSON output path")
+    parser.add_argument("--report-output", default="reports/pipeline_report.md", help="Report output path")
 
 
     parser_result = parser.parse_args()
@@ -46,10 +48,13 @@ def main():
     args = parse_args()
 
     result = run_pipeline(args.book_pages, args.amazon_csv, args.amazon_limit)
+    report = generate_markdown_report(result)
     save_csv(args.csv_output, result["records"])
     save_json(args.json_output, result)
+    save_text(args.report_output, report)
     print(f"CSV save to: {args.csv_output}")
     print(f"JSON saved to: {args.json_output}")
+    print(f"Report saved to: {args.report_output}")
     print("Pipeline statistics:")
     pprint(result["pipeline_stats"])
     print("\nDataset analysis:")

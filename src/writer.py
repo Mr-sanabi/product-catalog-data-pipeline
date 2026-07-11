@@ -38,3 +38,7 @@ def save_json(file_path, data):
     ensure_parent_directory(file_path)    
     with open(file_path, "w", encoding="utf-8") as file:
         json.dump(data, file, indent=2, ensure_ascii=False)
+
+def save_text(file_path, text):
+    with open(file_path, "w", encoding="utf-8") as file:
+        file.write(text)
