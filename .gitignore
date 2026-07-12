@@ -8,3 +8,5 @@ data/*
 
 logs/
 .pytest_cache/
+reports/*
+!reports/.gitkeep
