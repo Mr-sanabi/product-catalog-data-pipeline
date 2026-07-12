@@ -3,6 +3,8 @@ from src.pipeline import run_pipeline
 from pprint import pprint
 from src.writer import save_csv, save_json, save_text
 from src.report import generate_markdown_report
+from src.logging_config import setup_logging
+import logging
 
 def non_negative_int(value):
     try:
@@ -46,19 +48,20 @@ def parse_args():
 
 def main():
     args = parse_args()
-
+    setup_logging()
+    
     result = run_pipeline(args.book_pages, args.amazon_csv, args.amazon_limit)
+    final_records = result["pipeline_stats"]["final_records"]
+    if final_records == 0:
+        logging.warning("Pipeline produced no final records.")
     report = generate_markdown_report(result)
-    save_csv(args.csv_output, result["records"])
-    save_json(args.json_output, result)
-    save_text(args.report_output, report)
-    print(f"CSV save to: {args.csv_output}")
-    print(f"JSON saved to: {args.json_output}")
-    print(f"Report saved to: {args.report_output}")
-    print("Pipeline statistics:")
-    pprint(result["pipeline_stats"])
-    print("\nDataset analysis:")
-    pprint(result["analysis"])
+    try:
+        save_csv(args.csv_output, result["records"])
+        save_json(args.json_output, result)
+        save_text(args.report_output, report)
+    except OSError as e:
+        logging.error(f"Failed to save output files: {e}")
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":

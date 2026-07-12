@@ -6,5 +6,5 @@ __pycache__/
 data/*
 !data/.gitkeep
 
-*.log
-log.txt
+logs/
+.pytest_cache/
