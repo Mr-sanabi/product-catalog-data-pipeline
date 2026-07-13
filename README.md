@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./assets/product-data-pipeline-banner.svg" alt="Product Catalog Data Pipeline banner" width="100%" />
+  <img src="./assets/product-data-pipeline-banner-v2.svg" alt="Product Catalog Data Pipeline banner" width="100%" />
 </div>
 
 <br>
