@@ -1,4 +1,10 @@
 <div align="center">
+  <img src="./assets/product-data-pipeline-banner.svg" alt="Product Catalog Data Pipeline banner" width="100%" />
+</div>
+
+<br>
+
+<div align="center">
 
 # 🛒 Product Catalog Data Pipeline
 
